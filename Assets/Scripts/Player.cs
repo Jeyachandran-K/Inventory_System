@@ -5,12 +5,16 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float playerMovementSpeed;
     [SerializeField] private float playerRotateSpeed;
+    [SerializeField] private InventoryUI inventoryUI;
 
     private Rigidbody2D playerRigidbody2D;
+    private Inventory inventory;
 
     private void Awake()
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
+        inventory = new Inventory();
+        inventoryUI.SetInventory(inventory);
     }
     private void FixedUpdate()
     {
