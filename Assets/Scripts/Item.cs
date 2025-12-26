@@ -9,10 +9,10 @@ public class Item
         Circle,
         Rectangle,
         Square,
+        Triangle
     }
     public ItemType itemType;
     public int amount;
-    public bool isStackable;
 
     public Sprite GetSprite()
     {
@@ -21,6 +21,7 @@ public class Item
             case ItemType.Circle: return ItemAsset.Instance.GetCircleSprite();
             case ItemType.Square: return ItemAsset.Instance.GetSquareSprite();
             case ItemType.Rectangle: return ItemAsset.Instance.GetRectangleSprite();
+            case ItemType.Triangle: return ItemAsset.Instance.GetTriangleSprite();  
         }
         return null;
     }
@@ -32,6 +33,7 @@ public class Item
             case ItemType.Square:
                 return true;
             case ItemType.Rectangle:
+            case ItemType.Triangle:
                 return false;
             default: 
                 return false;

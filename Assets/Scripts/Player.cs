@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -89,10 +88,10 @@ public class Player : MonoBehaviour
                 else
                 {
                     inventory.AddItem(itemWorld.GetItem());
-                    itemAlreadyExist = true;
                     itemWorld.DestroySelf();
                 }
-                
+                itemAlreadyExist = true;
+
             }
             if (!itemAlreadyExist)
             {
