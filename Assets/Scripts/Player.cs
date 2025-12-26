@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
+    public event EventHandler OnHittingItems;
+
     [SerializeField] private float playerMovementSpeed;
     [SerializeField] private float playerRotateSpeed;
     [SerializeField] private InventoryUI inventoryUI;
@@ -12,6 +17,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         playerRigidbody2D = GetComponent<Rigidbody2D>();
         inventory = new Inventory();
         
@@ -19,7 +25,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         inventoryUI.SetInventory(inventory);
-
     }
     private void FixedUpdate()
     {
@@ -43,6 +48,17 @@ public class Player : MonoBehaviour
         if (Keyboard.current.leftArrowKey.isPressed)
         {
             playerRigidbody2D.AddTorque(playerRotateSpeed);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.TryGetComponent<ItemWorld>(out ItemWorld itemWorld))
+        {
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+            OnHittingItems?.Invoke(this, EventArgs.Empty);
+            
         }
     }
 }

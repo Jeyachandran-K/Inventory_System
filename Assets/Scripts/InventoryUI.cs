@@ -14,11 +14,22 @@ public class InventoryUI : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        Player.Instance.OnHittingItems += Player_OnHittingItems;
+    }
+
+    private void Player_OnHittingItems(object sender, System.EventArgs e)
+    {
+        RefreshInventory();
+    }
+
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
         RefreshInventory();
     }
+
     private void RefreshInventory()
     {
         int x = 0;

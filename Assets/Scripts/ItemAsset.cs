@@ -6,6 +6,7 @@ public class ItemAsset : MonoBehaviour
     [SerializeField] private Sprite circleSprite;
     [SerializeField] private Sprite rectangleSprite;
     [SerializeField] private Sprite squareSprite;
+    [SerializeField] private Transform ItemWorldPrefab;
 
     private void Awake()
     {
@@ -23,5 +24,9 @@ public class ItemAsset : MonoBehaviour
     public Sprite GetRectangleSprite()
     {
         return rectangleSprite;
+    }
+    public Transform GetItemWorldPrefab()
+    {
+        return ItemWorldPrefab;
     }
 }

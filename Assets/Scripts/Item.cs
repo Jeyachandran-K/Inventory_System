@@ -1,11 +1,13 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class Item 
 {
     public enum ItemType
     {
         Circle,
-        Triangle,
+        Rectangle,
         Square,
     }
     public ItemType itemType;
@@ -17,7 +19,7 @@ public class Item
         {
             case ItemType.Circle: return ItemAsset.Instance.GetCircleSprite();
             case ItemType.Square: return ItemAsset.Instance.GetSquareSprite();
-            case ItemType.Triangle: return ItemAsset.Instance.GetRectangleSprite();
+            case ItemType.Rectangle: return ItemAsset.Instance.GetRectangleSprite();
         }
         return null;
     }
