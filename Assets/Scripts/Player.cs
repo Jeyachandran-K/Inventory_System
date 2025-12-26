@@ -55,7 +55,24 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<ItemWorld>(out ItemWorld itemWorld))
         {
-            inventory.AddItem(itemWorld.GetItem());
+            bool itemAlreadyExist=false;
+            if(inventory.GetItemList().Count > 0)
+            {
+                foreach (Item item in inventory.GetItemList())
+                {
+                    if (item.itemType == itemWorld.GetItem().itemType)
+                    {
+                        item.amount += itemWorld.GetItem().amount;
+                        itemAlreadyExist = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!itemAlreadyExist)
+            {
+                inventory.AddItem(itemWorld.GetItem());
+            }
             itemWorld.DestroySelf();
             OnHittingItems?.Invoke(this, EventArgs.Empty);
             

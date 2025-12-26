@@ -679,7 +679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 0
-    amount: 1
+    amount: 10
 --- !u!4 &611758732
 Transform:
   m_ObjectHideFlags: 0

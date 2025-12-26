@@ -1,8 +1,10 @@
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 
 public class ItemWorld : MonoBehaviour
 {
+    private TextMeshPro worldTextMesh;
     public static ItemWorld SpawnItemWorld(Vector3 position,Item item)
     {
         Transform itemWorldTransform=Instantiate(ItemAsset.Instance.GetItemWorldPrefab(), position,Quaternion.identity);
@@ -17,6 +19,7 @@ public class ItemWorld : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        worldTextMesh = GetComponentInChildren<TextMeshPro>();
     }
 
     public void SetItem(Item item)
@@ -24,6 +27,8 @@ public class ItemWorld : MonoBehaviour
         this.item = item;
         spriteRenderer.sprite = item.GetSprite();
         spriteRenderer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        worldTextMesh.text = item.amount.ToString();
+
     }
     public Item GetItem()
     {
