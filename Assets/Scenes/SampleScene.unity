@@ -547,9 +547,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe8461ee04e3e542a5cf43017f2f425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemAsset
-  circleSprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  rectangleSprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  squareSprite: {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  circleSprite: {fileID: -6573826362745927925, guid: 8fbf8a72a0578174d86b80ee2bebe586, type: 3}
+  rectangleSprite: {fileID: 3835100887232984861, guid: b5e01a8d3f0009944bdb82e0a08b53ff, type: 3}
+  squareSprite: {fileID: 2924560605029197246, guid: fa95f7b49a8ec2949b36bc579a7639c6, type: 3}
 --- !u!4 &1028271791
 Transform:
   m_ObjectHideFlags: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 0.61581486, g: 0.6509434, b: 0.51891243, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
