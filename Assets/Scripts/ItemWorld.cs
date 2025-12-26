@@ -27,7 +27,15 @@ public class ItemWorld : MonoBehaviour
         this.item = item;
         spriteRenderer.sprite = item.GetSprite();
         spriteRenderer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        worldTextMesh.text = item.amount.ToString();
+        if (item.amount > 1)
+        {
+            worldTextMesh.text = item.amount.ToString();
+        }
+        else
+        {
+            worldTextMesh.text = "";
+        }
+        
 
     }
     public Item GetItem()

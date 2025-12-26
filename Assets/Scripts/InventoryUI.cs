@@ -41,7 +41,7 @@ public class InventoryUI : MonoBehaviour
             RectTransform itemSlotImageRecttransform = Instantiate(itemSlotImage, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotImageRecttransform.anchoredPosition = new Vector2(x*cellSize,y*cellSize);
             itemSlotImageRecttransform.gameObject.GetComponent<Image>().sprite = item.GetSprite();
-            if (item.amount > 0)
+            if (item.amount > 1)
             {
                 itemSlotImageRecttransform.GetComponentInChildren<TextMeshProUGUI>().text = item.amount.ToString();
             }
