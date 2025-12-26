@@ -35,19 +35,19 @@ public class Player : MonoBehaviour
     {
         if (Keyboard.current.upArrowKey.isPressed)
         {
-            playerRigidbody2D.AddForce(transform.up * playerMovementSpeed);
+            playerRigidbody2D.AddForce(Vector3.up * playerMovementSpeed);
         }
         if (Keyboard.current.downArrowKey.isPressed)
         {
-            playerRigidbody2D.AddForce(-transform.up * playerMovementSpeed);
+            playerRigidbody2D.AddForce(Vector3.down * playerMovementSpeed);
         }
         if (Keyboard.current.rightArrowKey.isPressed)
         {
-            playerRigidbody2D.AddTorque(-playerRotateSpeed);
+            playerRigidbody2D.AddForce(Vector3.right * playerMovementSpeed);
         }
         if (Keyboard.current.leftArrowKey.isPressed)
         {
-            playerRigidbody2D.AddTorque(playerRotateSpeed);
+            playerRigidbody2D.AddForce(Vector3.left * playerMovementSpeed);
         }
     }
 
