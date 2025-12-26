@@ -12,6 +12,7 @@ public class Item
     }
     public ItemType itemType;
     public int amount;
+    public bool isStackable;
 
     public Sprite GetSprite()
     {
@@ -22,6 +23,19 @@ public class Item
             case ItemType.Rectangle: return ItemAsset.Instance.GetRectangleSprite();
         }
         return null;
+    }
+    public bool GetIsStackable()
+    {
+        switch (itemType)
+        {
+            case ItemType.Circle:
+            case ItemType.Square:
+                return true;
+            case ItemType.Rectangle:
+                return false;
+            default: 
+                return false;
+        }
     }
 
 }

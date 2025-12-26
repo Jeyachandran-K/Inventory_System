@@ -19,7 +19,6 @@ public class InventoryUI : MonoBehaviour
     {
         Player.Instance.OnHittingItems += Player_OnHittingItems;
     }
-
     private void Player_OnHittingItems(object sender, System.EventArgs e)
     {
         RefreshInventory();
@@ -53,4 +52,5 @@ public class InventoryUI : MonoBehaviour
             }
         }
     }
+    
 }

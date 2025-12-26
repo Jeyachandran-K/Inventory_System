@@ -5,6 +5,7 @@ using UnityEngine;
 public class Inventory 
 {
     private List<Item> itemList;
+    private int maxItemSlot = 15;
 
     public Inventory()
     {
@@ -19,4 +20,9 @@ public class Inventory
     {
         itemList.Add(item);
     }
+    public bool IsFull()
+    {
+        return itemList.Count >= maxItemSlot;
+    }
+
 }
