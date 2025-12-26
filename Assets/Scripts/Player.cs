@@ -14,7 +14,12 @@ public class Player : MonoBehaviour
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
         inventory = new Inventory();
+        
+    }
+    private void Start()
+    {
         inventoryUI.SetInventory(inventory);
+
     }
     private void FixedUpdate()
     {
