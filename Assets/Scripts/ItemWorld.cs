@@ -46,4 +46,8 @@ public class ItemWorld : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    public void RefreshAmount()
+    {
+        worldTextMesh.text = item.amount.ToString();
+    }
 }

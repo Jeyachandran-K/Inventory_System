@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if(collision.gameObject.TryGetComponent<ItemWorld>(out ItemWorld itemWorld))
         {
             LogicCheck(itemWorld);
@@ -100,10 +102,13 @@ public class Player : MonoBehaviour
                 int itemSum = ItemSum(item, itemWorld);
                 if(itemSum > inventory.GetMaxStackableNumber())
                 {
-                    int storableItem = inventory.GetMaxStackableNumber()-item.amount;
+                    int storableItem = inventory.GetMaxStackableNumber() - item.amount;
                     item.amount += storableItem;
                     itemWorld.GetItem().amount -= storableItem;
+                    itemWorld.RefreshAmount();
                     AddItemToInventory(itemWorld);
+                    itemAlreadyExist = true;
+                    break;
                 }
                 else
                 {
