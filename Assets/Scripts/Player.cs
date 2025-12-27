@@ -55,59 +55,84 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<ItemWorld>(out ItemWorld itemWorld))
         {
-            bool itemAlreadyExist=false;
+            LogicCheck(itemWorld);
+            OnHittingItems?.Invoke(this, EventArgs.Empty);
 
-            if (itemWorld.GetItem().GetIsStackable())
+        }
+    }
+
+    private void LogicCheck(ItemWorld itemWorld)
+    {
+        bool itemAlreadyExist = false;
+
+        if (itemWorld.GetItem().GetIsStackable())
+        {
+            if (inventory.GetItemList().Count == 0)
             {
-                if (inventory.GetItemList().Count == 0)
-                {
-                    inventory.AddItem(itemWorld.GetItem());
-                    itemAlreadyExist = true;
-                    itemWorld.DestroySelf();
-                }
-                else
-                {
-                    foreach (Item item in inventory.GetItemList())
-                    {
-                        if (item.itemType == itemWorld.GetItem().itemType)
-                        {
-                            item.amount += itemWorld.GetItem().amount;
-                            itemAlreadyExist = true;
-                            itemWorld.DestroySelf();
-                            break;
-                        }
-                    }
-                }
+                inventory.AddItem(itemWorld.GetItem());
+                itemAlreadyExist = true;
+                itemWorld.DestroySelf();
             }
             else
             {
-                if (inventory.IsFull())
-                {
-                    Debug.Log("Inventory is full");
-                }
-                else
-                {
-                    inventory.AddItem(itemWorld.GetItem());
-                    itemWorld.DestroySelf();
-                }
-                itemAlreadyExist = true;
-
+                itemAlreadyExist = CheckItemExist(itemWorld, itemAlreadyExist);
             }
-            if (!itemAlreadyExist)
-            {
-                if (inventory.IsFull())
-                {
-                    Debug.Log("Inventory is full");
-                }
-                else
-                {
-                    inventory.AddItem(itemWorld.GetItem());
-                    itemWorld.DestroySelf();
-                }
-                   
-            }
-            OnHittingItems?.Invoke(this, EventArgs.Empty);
-            
         }
+        else
+        {
+            AddItemToInventory(itemWorld);
+            itemAlreadyExist = true;
+
+        }
+        if (!itemAlreadyExist)
+        {
+            AddItemToInventory(itemWorld);
+        }
+    }
+
+    private bool CheckItemExist(ItemWorld itemWorld, bool itemAlreadyExist)
+    {
+        foreach (Item item in inventory.GetItemList())
+        {
+            if (item.itemType == itemWorld.GetItem().itemType)
+            {
+                if(item.amount==inventory.GetMaxStackableNumber()) continue;
+                int itemSum = ItemSum(item, itemWorld);
+                if(itemSum > inventory.GetMaxStackableNumber())
+                {
+                    int storableItem = inventory.GetMaxStackableNumber()-item.amount;
+                    item.amount += storableItem;
+                    itemWorld.GetItem().amount -= storableItem;
+                    AddItemToInventory(itemWorld);
+                }
+                else
+                {
+                    item.amount += itemWorld.GetItem().amount;
+                    itemAlreadyExist = true;
+                    itemWorld.DestroySelf();
+                    break;
+                }
+                
+            }
+        }
+
+        return itemAlreadyExist;
+    }
+
+    private void AddItemToInventory(ItemWorld itemWorld)
+    {
+        if (inventory.IsFull())
+        {
+            Debug.Log("Inventory is full");
+        }
+        else
+        {
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
+    }
+    private int ItemSum(Item item,ItemWorld itemWorld)
+    {
+        return item.amount + itemWorld.GetItem().amount;
     }
 }
