@@ -317,7 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 2
-    amount: 2
+    amount: 7
 --- !u!4 &36490834
 Transform:
   m_ObjectHideFlags: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 0
-    amount: 2
+    amount: 9
 --- !u!4 &65158432
 Transform:
   m_ObjectHideFlags: 0
@@ -975,7 +975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 0
-    amount: 10
+    amount: 8
 --- !u!4 &130906544
 Transform:
   m_ObjectHideFlags: 0
@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 0
-    amount: 10
+    amount: 8
 --- !u!4 &611758732
 Transform:
   m_ObjectHideFlags: 0
@@ -2047,7 +2047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 2
-    amount: 2
+    amount: 8
 --- !u!4 &647736168
 Transform:
   m_ObjectHideFlags: 0
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 2
-    amount: 11
+    amount: 8
 --- !u!4 &836494653
 Transform:
   m_ObjectHideFlags: 0
@@ -3243,7 +3243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
   item:
     itemType: 2
-    amount: 11
+    amount: 6
 --- !u!4 &1816946827
 Transform:
   m_ObjectHideFlags: 0
