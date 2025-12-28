@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     {
         inventoryUI.SetInventory(inventory);
     }
+
     private void FixedUpdate()
     {
         HandleMovement();

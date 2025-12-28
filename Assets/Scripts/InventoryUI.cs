@@ -29,12 +29,14 @@ public class InventoryUI : MonoBehaviour
         this.inventory = inventory;
         RefreshInventory();
     }
-
+    public Inventory GetInventory()
+    {
+        return inventory;
+    }
     private void RefreshInventory()
     {
         foreach (Transform child in itemSlotContainer)
         {
-            Debug.Log("child list : " + child);
             Destroy(child.gameObject);
         }
         int x = 0;
@@ -45,6 +47,7 @@ public class InventoryUI : MonoBehaviour
             RectTransform itemSlotImageRecttransform = Instantiate(itemSlotImage, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotImageRecttransform.anchoredPosition = new Vector2(x*cellSize,y*cellSize);
             itemSlotImageRecttransform.gameObject.GetComponent<Image>().sprite = item.GetSprite();
+            itemSlotImageRecttransform.gameObject.GetComponent<ItemSlotImage>().SetItem(item);
             if (item.amount > 1)
             {
                 itemSlotImageRecttransform.GetComponentInChildren<TextMeshProUGUI>().text = item.amount.ToString();
