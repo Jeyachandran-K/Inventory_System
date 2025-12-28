@@ -5,12 +5,13 @@ using UnityEngine;
 public class Inventory 
 {
     private List<Item> itemList;
-    private int maxItemSlot = 15;
+    private int maxItemSlot;
     private int maxStackableNumber = 10;
 
-    public Inventory()
+    public Inventory(int maxItemSlot)
     {
         itemList = new List<Item>();
+        this.maxItemSlot = maxItemSlot;
     }
 
     public List<Item> GetItemList()
@@ -29,5 +30,5 @@ public class Inventory
     {
         return maxStackableNumber;
     }
-
+    
 }

@@ -2,13 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class ToolbarUI : MonoBehaviour
 {
     private Inventory inventory;
     private Transform itemSlotContainer;
-    private int maxItemSlot = 15;
+    private int maxItemSlot = 14;
 
-    [SerializeField]private Transform itemSlotImage;
+    [SerializeField] private Transform itemSlotImage;
 
     private void Awake()
     {
@@ -44,21 +44,18 @@ public class InventoryUI : MonoBehaviour
         foreach (Item item in inventory.GetItemList())
         {
             RectTransform itemSlotImageRecttransform = Instantiate(itemSlotImage, itemSlotContainer).GetComponent<RectTransform>();
-            itemSlotImageRecttransform.anchoredPosition = new Vector2(x*cellSize,y*cellSize);
+            itemSlotImageRecttransform.anchoredPosition = new Vector2(x * cellSize, y * cellSize);
             itemSlotImageRecttransform.gameObject.GetComponent<Image>().sprite = item.GetSprite();
             itemSlotImageRecttransform.gameObject.GetComponent<ItemSlotImage>().SetItem(item);
             if (item.amount > 1)
             {
                 itemSlotImageRecttransform.GetComponentInChildren<TextMeshProUGUI>().text = item.amount.ToString();
             }
-            
             x++;
-            if (x > 4)
+            if (x > 13)
             {
                 x = 0;
-                y--;
             }
         }
     }
-    
 }

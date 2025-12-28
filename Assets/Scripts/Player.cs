@@ -12,20 +12,24 @@ public class Player : MonoBehaviour
     [SerializeField] private float playerMovementSpeed;
     [SerializeField] private float playerRotateSpeed;
     [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private ToolbarUI toolbarUI;
 
     private Rigidbody2D playerRigidbody2D;
     private Inventory inventory;
+    private Inventory toolBarInventory;
 
     private void Awake()
     {
         Instance = this;
         playerRigidbody2D = GetComponent<Rigidbody2D>();
-        inventory = new Inventory();
+        inventory = new Inventory(15);
+        toolBarInventory = new Inventory(14);
         
     }
     private void Start()
     {
         inventoryUI.SetInventory(inventory);
+        toolbarUI.SetInventory(toolBarInventory);
     }
 
     private void FixedUpdate()
@@ -58,56 +62,57 @@ public class Player : MonoBehaviour
         
         if(collision.gameObject.TryGetComponent<ItemWorld>(out ItemWorld itemWorld))
         {
-            LogicCheck(itemWorld);
+            Inventory inventoryTemp = toolBarInventory.IsFull()? inventory : toolBarInventory;
+            LogicCheck(itemWorld,inventoryTemp);
             OnHittingItems?.Invoke(this, EventArgs.Empty);
 
         }
     }
 
-    private void LogicCheck(ItemWorld itemWorld)
+    private void LogicCheck(ItemWorld itemWorld, Inventory inventoryTemp)
     {
         bool itemAlreadyExist = false;
 
         if (itemWorld.GetItem().GetIsStackable())
         {
-            if (inventory.GetItemList().Count == 0)
+            if (inventoryTemp.GetItemList().Count == 0)
             {
-                inventory.AddItem(itemWorld.GetItem());
+                inventoryTemp.AddItem(itemWorld.GetItem());
                 itemAlreadyExist = true;
                 itemWorld.DestroySelf();
             }
             else
             {
-                itemAlreadyExist = CheckItemExist(itemWorld, itemAlreadyExist);
+                itemAlreadyExist = CheckItemExist(itemWorld, itemAlreadyExist, inventoryTemp);
             }
         }
         else
         {
-            AddItemToInventory(itemWorld);
+            AddItemToInventory(itemWorld, inventoryTemp);
             itemAlreadyExist = true;
 
         }
         if (!itemAlreadyExist)
         {
-            AddItemToInventory(itemWorld);
+            AddItemToInventory(itemWorld, inventoryTemp);
         }
     }
 
-    private bool CheckItemExist(ItemWorld itemWorld, bool itemAlreadyExist)
+    private bool CheckItemExist(ItemWorld itemWorld, bool itemAlreadyExist, Inventory inventoryTemp)
     {
-        foreach (Item item in inventory.GetItemList())
+        foreach (Item item in inventoryTemp.GetItemList())
         {
             if (item.itemType == itemWorld.GetItem().itemType)
             {
-                if(item.amount==inventory.GetMaxStackableNumber()) continue;
+                if(item.amount== inventoryTemp.GetMaxStackableNumber()) continue;
                 int itemSum = ItemSum(item, itemWorld);
-                if(itemSum > inventory.GetMaxStackableNumber())
+                if(itemSum > inventoryTemp.GetMaxStackableNumber())
                 {
-                    int storableItem = inventory.GetMaxStackableNumber() - item.amount;
+                    int storableItem = inventoryTemp.GetMaxStackableNumber() - item.amount;
                     item.amount += storableItem;
                     itemWorld.GetItem().amount -= storableItem;
                     itemWorld.RefreshAmount();
-                    AddItemToInventory(itemWorld);
+                    AddItemToInventory(itemWorld, inventoryTemp);
                     itemAlreadyExist = true;
                     break;
                 }
@@ -125,15 +130,15 @@ public class Player : MonoBehaviour
         return itemAlreadyExist;
     }
 
-    private void AddItemToInventory(ItemWorld itemWorld)
+    private void AddItemToInventory(ItemWorld itemWorld, Inventory inventoryTemp)
     {
-        if (inventory.IsFull())
+        if (inventoryTemp.IsFull())
         {
             Debug.Log("Inventory is full");
         }
         else
         {
-            inventory.AddItem(itemWorld.GetItem());
+            inventoryTemp.AddItem(itemWorld.GetItem());
             itemWorld.DestroySelf();
         }
     }
