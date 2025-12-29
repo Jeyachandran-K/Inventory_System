@@ -5,8 +5,9 @@ using UnityEngine;
 public class Inventory 
 {
     private List<Item> itemList;
-    private int maxItemSlot = 15;
-    private int maxStackableNumber = 10;
+    private readonly int maxItemSlot = 15;
+    private readonly int maxStackableNumber = 10;
+    private bool isFull;
 
     public Inventory()
     {
@@ -23,7 +24,8 @@ public class Inventory
     }
     public bool IsFull()
     {
-        return itemList.Count >= maxItemSlot;
+        isFull = itemList.Count >= maxItemSlot;
+        return isFull;
     }
     public  int GetMaxStackableNumber()
     {
